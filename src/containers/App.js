@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import store, { history } from "../store/store";
 import { Provider } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
+import "../assets/main.css";
 
 const AsyncNoMatch = importedComponent(
   () => import(/* webpackChunkName:'NoMatch' */ "../components/NoMatch"),
