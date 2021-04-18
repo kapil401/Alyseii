@@ -22,15 +22,6 @@ const config = {
         test: /\.css$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              esModule: true,
-              modules: {
-                namedExport: true,
-              },
-            },
-          },
-          {
             loader: 'css-loader',
             options: {
               importLoaders: 1,

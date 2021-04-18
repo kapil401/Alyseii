@@ -3,20 +3,19 @@ import { Switch, BrowserRouter, Route } from "react-router-dom";
 import importedComponent from "react-imported-component";
 import Loading from "../components/Loading";
 import { createRoutes } from "../routes/index";
-import { useHistory } from "react-router-dom";
 import store, { history } from "../store/store";
-import { Provider } from "react-redux";
+import { Provider } from "react-redux"; 
 import { ConnectedRouter } from "connected-react-router";
-import "../assets/main.css";
-
+import "../assets/main.css"; 
+ 
 const AsyncNoMatch = importedComponent(
   () => import(/* webpackChunkName:'NoMatch' */ "../components/NoMatch"),
-  {
+  { 
     LoadingComponent: Loading,
   }
-);
+); 
 
-
+ 
 const App = () => {
   const routes = createRoutes();
   return ( 
