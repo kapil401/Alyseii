@@ -19,7 +19,7 @@ const addons = (/* string | string[] */ addonsArg) => {
 };
 
 const config={
-  // mode: 'development',
+  mode: 'development',
   entry: {
     app: [`${commonPaths.appEntry}/index.js`, 'webpack-plugin-serve/client'],
   },
@@ -88,6 +88,13 @@ const config={
           'postcss-loader'
         ]
       },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i, 
+        loader: 'file-loader',
+        options: {
+          name: '/public/icons/[name].[ext]'
+        }
+    }
     ]
   },
   watch:true,

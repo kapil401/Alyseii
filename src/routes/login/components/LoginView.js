@@ -1,6 +1,7 @@
 import React,{ Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {logIn,setLoginData} from "../modules/login"
+import logo from "../../../../public/images/logo.png"
 
 export function LoginView(props) {
     let loginData=useSelector(state=>state.auth);
@@ -26,7 +27,7 @@ export function LoginView(props) {
   <div className="site__width">
     <div className="site-align">
       <div className="site__logo">
-        <img src="images/logo.png" alt />
+        <img src="../../../../public/images/logo.png" alt />
       </div>
       <div className="login__form">
         <form className>

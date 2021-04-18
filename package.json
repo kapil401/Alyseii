@@ -6,7 +6,7 @@
   "author": "Esau Silva <@_esausilva>",
   "license": "MIT",
   "scripts": {
-    "dev": "yarn prebuild && wp --env dev",
+    "dev": "yarn prebuild && wp --env dev --mode=development",
     "dev:bundleanalyzer": "yarn prebuild && yarn dev --addons bundleanalyzer",
     "prebuild": "rimraf dist",
     "build": "cross-env NODE_ENV=production wp --env prod",
@@ -15,6 +15,7 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "connected-react-router": "^6.9.1",
+    "file-loader": "^6.2.0",
     "history": "^5.0.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
@@ -28,7 +29,8 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^2.0.3"
+    "semantic-ui-react": "^2.0.3",
+    "tailwindcss": "^2.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.13",
