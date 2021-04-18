@@ -17,6 +17,7 @@
     "connected-react-router": "^6.9.1",
     "file-loader": "^6.2.0",
     "history": "^5.0.0",
+    "postcss": "^8.2.10",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-delay-render": "^0.1.2",

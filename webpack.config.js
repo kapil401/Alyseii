@@ -92,7 +92,7 @@ const config={
         test: /\.(jpe?g|png|gif|svg)$/i, 
         loader: 'file-loader',
         options: {
-          name: '/public/icons/[name].[ext]'
+          name: 'public/images/[name].[ext]'
         }
     }
     ]
