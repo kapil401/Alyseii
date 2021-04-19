@@ -1,10 +1,6 @@
-# react-starter-boilerplate-hmr
+# react-kit
 
-> React Starter Boilerplate with React Fast Refresh and Webpack 5
-
-## Tutorial
-
-**The tutorial on my blog site is the most up-to-date with this template.** Visit my [blog entry](https://esausilva.com/2018/01/13/learn-webpack-for-react/) where I go step-by-step on how to build this boilerplate from scratch.
+> React Starter Boilerplate built with functional components, React Fast Refresh and Webpack 5
 
 ## Features
 
@@ -57,12 +53,4 @@ Run on the production oprimized build
 
 ```
 $ yarn build:bundleanalyzer
-```
-
-## Giving Back
-
-If you would like to support my work and the time I put in making tutorials, you can click the image below to get me a coffee. I would really appreciate it (but is not required).
-
-[![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/black_img.png)](https://www.buymeacoffee.com/esausilva)
-
--Esau Silva
+```"# react-kit" 

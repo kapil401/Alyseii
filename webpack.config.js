@@ -8,6 +8,8 @@ const { WebpackPluginServe: Serve } = require('webpack-plugin-serve');
 const commonPaths = require('./build-utils/common-paths');
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 
 const addons = (/* string | string[] */ addonsArg) => {
   let addons = Array.isArray(addonsArg)
@@ -56,6 +58,9 @@ const config={
     new MiniCssExtractPlugin(),
    new webpack.DefinePlugin(commonPaths.globals),
     new ReactRefreshWebpackPlugin(),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'server'
+    }),
     new Serve({
       historyFallback: true,
       liveReload: false,
