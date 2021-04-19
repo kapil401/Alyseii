@@ -69,7 +69,8 @@ const config={
   devServer: {
     open: true,
     clientLogLevel: 'silent',
-    contentBase: './dist',
+    contentBase: path.resolve('/public'),
+    publicPath:'/public',
     historyApiFallback: true,
     hot: true,
   },
