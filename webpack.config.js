@@ -1,5 +1,4 @@
 const buildValidations = require('./build-utils/build-validations');
-const commonConfig = require('./build-utils/webpack.common');
 const argv = require('webpack-nano/argv');
 const { merge } = require('webpack-merge');
 const path = require('path')
@@ -7,7 +6,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const { WebpackPluginServe: Serve } = require('webpack-plugin-serve');
 const commonPaths = require('./build-utils/common-paths');
-
+const webpack = require("webpack");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const addons = (/* string | string[] */ addonsArg) => {
   let addons = Array.isArray(addonsArg)
@@ -16,6 +16,32 @@ const addons = (/* string | string[] */ addonsArg) => {
   return addons.map((addonName) =>
     require(`config`)
   );
+};
+
+const commonconfig = {
+  output: {
+    path: commonPaths.outputPath,
+    publicPath: '/',
+  },
+  target: 'web',
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          chunks: 'initial',
+          test: /[\\/]node_modules[\\/]semantic-ui-([\S]+)[\\/]/,
+          name: 'vendor',
+          enforce: true,
+        },
+      },
+    },
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: `public/index.html`,
+      favicon: `public/favicon.ico`,
+    }),
+  ],
 };
 
 const config={
@@ -28,7 +54,7 @@ const config={
   },
   plugins: [
     new MiniCssExtractPlugin(),
-   // new HotModuleReplacementPlugin(),
+   new webpack.DefinePlugin(commonPaths.globals),
     new ReactRefreshWebpackPlugin(),
     new Serve({
       historyFallback: true,
@@ -107,7 +133,7 @@ module.exports = () => {
     throw new Error(buildValidations.ERR_NO_ENV_FLAG);
   }
 
-  const mergedConfig = merge(commonConfig, config);
+  const mergedConfig = merge(commonconfig, config);
 
   return mergedConfig;
 };

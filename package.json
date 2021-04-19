@@ -6,17 +6,20 @@
   "author": "Esau Silva <@_esausilva>",
   "license": "MIT",
   "scripts": {
-    "dev": "yarn prebuild && wp --env dev --mode=development",
+    "dev": "yarn prebuild && wp --env dev",
     "dev:bundleanalyzer": "yarn prebuild && yarn dev --addons bundleanalyzer",
     "prebuild": "rimraf dist",
     "build": "cross-env NODE_ENV=production wp --env prod",
-    "build:bundleanalyzer": "yarn build --addons bundleanalyzer"
+    "build:bundleanalyzer": "yarn build --addons bundleanalyzer",
+    "start":"nodemon server/index.js"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "connected-react-router": "^6.9.1",
+    "express": "^4.17.1",
     "file-loader": "^6.2.0",
     "history": "^5.0.0",
+    "nodemon": "^2.0.7",
     "postcss": "^8.2.10",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
