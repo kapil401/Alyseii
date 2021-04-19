@@ -1,6 +1,6 @@
-# react-kit
+# react-starter-boilerplate-hmr
 
-> React Starter Boilerplate built with functional components, React Fast Refresh and Webpack 5
+> React Starter Boilerplate with React Fast Refresh and Webpack 5
 
 ## Features
 
@@ -53,4 +53,6 @@ Run on the production oprimized build
 
 ```
 $ yarn build:bundleanalyzer
-```"# react-kit" 
+```
+
+..Rishabh verma
