@@ -6,7 +6,7 @@ import Login from "../routes/login/components/LoginView"
 import { Redirect } from "react-router";
 
 export const redirectRoute = () => {
-    return 
+    return <Redirect to=""/>
   };
   
   export const routes = [
