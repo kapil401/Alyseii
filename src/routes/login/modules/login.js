@@ -1,71 +1,76 @@
-export const REGISTER_SET_SIGNUP_FORM_FIELDS="REGISTER_SET_SIGNUP_FORM_FIELDS";
-export const REGISTER_SET_SIGNUP_FORM_FIELDS_SPINNER_STATUS="REGISTER_SET_SIGNUP_FORM_FIELDS_SPINNER_STATUS";
+export const LOGIN_P_SET_LOGIN_SPINNER_STATUS =
+  "LOGIN_P_SET_LOGIN_SPINNER_STATUS";
+export const LOGIN_P_SET_LOGIN_FORM_DATA = "LOGIN_P_SET_LOGIN_FORM_DATA";
 
-export function setFormFields(data) {
-    return {
-      type: REGISTER_SET_SIGNUP_FORM_FIELDS,
-      payload: data,
-    };
-  }
-
-export function setFormFieldSpinner(flag){
-    return {
-        type: REGISTER_SET_SIGNUP_FORM_FIELDS_SPINNER_STATUS,
-        payload: flag,
-      };
+export function setloginSpinner(flag) {
+  return {
+    type: LOGIN_P_SET_LOGIN_SPINNER_STATUS,
+    payload: flag,
+  };
 }
-  
 
-  export function fetchFormFields(data) {
-    return async (dispatch, getState) => {
-      await dispatch(setFormFieldSpinner(true));
-      try {
-        const result = await fetch(`http://alysei.ibyteinfomatics.com/public/api/get/registration/fields/3`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json; charset=utf-8",
-            Accept: "application/json",
-          },
-        });
-        let response = await result.json();
-        if (response.success) {
-          await dispatch(setFormFieldSpinner(false));
-          await dispatch(setFormFields(response.data));
-        }
-      } catch (e) {
-        await dispatch(setFormFieldSpinner(false));
-        console.log(e);
+export function setLoginData(data) {
+  return {
+    type: LOGIN_P_SET_LOGIN_FORM_DATA,
+    payload: data,
+  };
+}
+
+export function logIn(data) {
+  return async (dispatch, getState) => {
+    await dispatch(setloginSpinner(true));
+    const token = `Basic ${btoa(`${data.username}:${data.password}`)}`;
+    try {
+      const result = await fetch(`https://api.yoursafespaceonline.com/api/login`, {
+        method: "POST",
+        cache: "no-cache",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          Accept: "application/json",
+          Authorization: token,
+        },
+      });
+      let response = await result.json();
+      if (response.success) {
+        await dispatch(setloginSpinner(true));
+        console.log(response);
       }
-    };
-  }
-
-export const actions={
-    fetchFormFields,
-    setFormFieldSpinner,
-    setFormFields
-}  
-
-export const initialState={
-    formFields:{},
-    formSpinner:false
-}
-
-const ACTION_HANDLERS={
-    [REGISTER_SET_SIGNUP_FORM_FIELDS]:(state, action)=>{
-        return{
-            ...state,
-            formFields:action.payload
-        }
-    },
-    [REGISTER_SET_SIGNUP_FORM_FIELDS_SPINNER_STATUS]:(state,action)=>{
-        return{
-            ...state,
-            formSpinner:action.payload
-        }
+    } catch (e) {
+      await dispatch(setloginSpinner(false));
+      console.log(e);
     }
+  };
 }
+
+export const initialState = {
+  loginSpinner: false,
+  loginData:{
+    email:"",
+    password:""
+  }
+};
+
+export const loginActions = {
+  setloginSpinner,
+  setLoginData
+};
+
+const ACTION_HANDLERS = {
+  [LOGIN_P_SET_LOGIN_FORM_DATA]:(state, action)=>{
+    return {
+      ...state,
+      loginData: action.payload,
+    }
+  },
+  [LOGIN_P_SET_LOGIN_SPINNER_STATUS]: (state, action) => {
+    return {
+      ...state,
+      loginSpinner: action.payload,
+    };
+  },
+};
 
 export default function loginReducer(state = initialState, action) {
-    const handler = ACTION_HANDLERS[action.type];
-    return handler ? handler(state, action) : state;
+  const handler = ACTION_HANDLERS[action.type];
+  return handler ? handler(state, action) : state;
 }
