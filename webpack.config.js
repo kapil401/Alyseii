@@ -1,38 +1,35 @@
-const buildValidations = require('./build-utils/build-validations');
-const argv = require('webpack-nano/argv');
-const { merge } = require('webpack-merge');
-const path = require('path')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const { WebpackPluginServe: Serve } = require('webpack-plugin-serve');
-const commonPaths = require('./build-utils/common-paths');
+const buildValidations = require("./build-utils/build-validations");
+const argv = require("webpack-nano/argv");
+const { merge } = require("webpack-merge");
+const path = require("path");
+const { WebpackPluginServe: Serve } = require("webpack-plugin-serve");
+const commonPaths = require("./build-utils/common-paths");
 const webpack = require("webpack");
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 const addons = (/* string | string[] */ addonsArg) => {
   let addons = Array.isArray(addonsArg)
     ? addonsArg.filter((item) => item !== true)
     : [addonsArg].filter(Boolean);
-  return addons.map((addonName) =>
-    require(`config`)
-  );
+  return addons.map((addonName) => require(`config`));
 };
 
 const commonconfig = {
   output: {
     path: commonPaths.outputPath,
-    publicPath: '/',
+    publicPath: "/",
   },
-  target: 'web',
+  target: "web",
   optimization: {
     splitChunks: {
       cacheGroups: {
         vendor: {
-          chunks: 'initial',
+          chunks: "initial",
           test: /[\\/]node_modules[\\/]semantic-ui-([\S]+)[\\/]/,
-          name: 'vendor',
+          name: "vendor",
           enforce: true,
         },
       },
@@ -46,26 +43,26 @@ const commonconfig = {
   ],
 };
 
-const config={
-  mode: 'development',
+const config = {
+  mode: "development",
   entry: {
-    app: [`${commonPaths.appEntry}/index.js`, 'webpack-plugin-serve/client'],
+    app: [`${commonPaths.appEntry}/index.js`, "webpack-plugin-serve/client"],
   },
   output: {
-    filename: '[name].[fullhash].js',
+    filename: "[name].[fullhash].js",
   },
   plugins: [
     new MiniCssExtractPlugin(),
-   new webpack.DefinePlugin(commonPaths.globals),
+    new webpack.DefinePlugin(commonPaths.globals),
     new ReactRefreshWebpackPlugin(),
     new BundleAnalyzerPlugin({
-      analyzerMode: 'server'
+      analyzerMode: "server",
     }),
     new Serve({
       historyFallback: true,
       liveReload: false,
       hmr: true,
-      host: 'localhost',
+      host: "localhost",
       port: 3000,
       open: true,
       static: commonPaths.outputPath,
@@ -73,9 +70,9 @@ const config={
   ],
   devServer: {
     open: true,
-    clientLogLevel: 'silent',
-    contentBase: path.resolve('/public'),
-    publicPath:'/public',
+    clientLogLevel: "silent",
+    contentBase: path.resolve("/public"),
+    publicPath: "/path",
     historyApiFallback: true,
     hot: true,
   },
@@ -83,28 +80,33 @@ const config={
     rules: [
       {
         test: /\.(jsx|js)$/,
-        include: path.resolve(__dirname, 'src'),
+        include: path.resolve(__dirname, "src"),
         exclude: /node_modules/,
-        use: [{
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              ['@babel/preset-env', {
-                "targets": {
-                  "node": "12"
-                }
-              }],
-              '@babel/preset-react'
-            ]
-          }
-        }]
+        use: [
+          {
+            loader: "babel-loader",
+            options: {
+              presets: [
+                [
+                  "@babel/preset-env",
+                  {
+                    targets: {
+                      node: "12",
+                    },
+                  },
+                ],
+                "@babel/preset-react",
+              ],
+            },
+          },
+        ],
       },
       {
         test: /\.css$/i,
-        include: path.resolve(__dirname, 'src'),
+        include: path.resolve(__dirname, "src"),
         exclude: /node_modules/,
         use: [
-          'style-loader',
+          "style-loader",
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
@@ -112,25 +114,25 @@ const config={
             },
           },
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
-              importLoaders: 1
-            }
+              importLoaders: 1,
+            },
           },
-          'postcss-loader'
-        ]
+          "postcss-loader",
+        ],
       },
       {
-        test: /\.(jpe?g|png|gif|svg)$/i, 
-        loader: 'file-loader',
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loader: "file-loader",
         options: {
-          name: 'public/images/[name].[ext]'
-        }
-    }
-    ]
+          name: "public/images/[name].[ext]",
+        },
+      },
+    ],
   },
-  watch:true,
-}
+  watch: true,
+};
 
 module.exports = () => {
   const { env, addons: addonsArg } = argv;

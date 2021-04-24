@@ -19,7 +19,7 @@ export const routes = [
       {
         path: "/",
         exact: true,
-        component: Login,
+        component: redirectRoute,
       },
       {
         path: "/register",
@@ -35,7 +35,7 @@ export const routes = [
                 component: RegisterView,
               },
               {
-                path: "/register",
+                path: "/register/:role",
                 exact: true,
                 component: FormView,
               },

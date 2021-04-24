@@ -1,18 +1,11 @@
-import React, { Fragment,useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import { fetchFormFields } from "../modules/register";
 import { Link } from "react-router-dom";
-import { connect,useDispatch } from 'react-redux';
-import actions from "../modules/register"
+import { connect, useDispatch } from "react-redux";
+import actions from "../modules/register";
 import { bindActionCreators } from "redux";
 
 export function RegisterView(params) {
-
-  const dispatch = useDispatch()
-  useEffect(async() => {
-    
-    await dispatch(fetchFormFields())
-  }, [])
-
 
   return (
     <Fragment>
@@ -26,7 +19,10 @@ export function RegisterView(params) {
       <div className="card-list">
         <ul>
           <li>
-            <Link to="/register/producer" onClick={()=>dispatch(fetchFormFields(3))}>
+            <Link
+              to="/register/producer"
+              //onClick={() => dispatch(fetchFormFields(3))}
+            >
               Italian F&amp;B Producers{" "}
               <i className="fas fa-angle-double-right" />
             </Link>
@@ -73,4 +69,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps,mapDispatchToProps)(RegisterView);
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterView);

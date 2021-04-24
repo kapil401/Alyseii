@@ -18,6 +18,7 @@ export function setFormFieldSpinner(flag) {
 }
 
 export function fetchFormFields(id) {
+  console.log();
   return async (dispatch, getState) => {
     await dispatch(setFormFieldSpinner(true));
     try {
