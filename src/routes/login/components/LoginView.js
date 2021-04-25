@@ -8,9 +8,9 @@ export function LoginView(props) {
   const dispatch = useDispatch();
 
   const handlechange = async (event) => {
-    const name = event.target.name;
+    const name = event.target.id;
     const value = event.target.value;
-    loginData[name] = value;
+    loginData[name] = value; 
     await dispatch(setLoginData(loginData));
   };
 

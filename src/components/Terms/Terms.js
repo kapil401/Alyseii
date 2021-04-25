@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import ReactHtmlParser from 'react-html-parser';
 
 export function Terms({label,id}) {
-    console.log(label);
     return (
     <Fragment>
       <div className="form__item form__checkbox">

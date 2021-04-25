@@ -9,6 +9,10 @@ import Terms from "../../../components/Terms/Terms";
 
 export function FormView(props) {
   let { formFields } = useSelector((state) => state.register);
+  
+  let {
+    role_data: { roles },
+  } = useSelector((state) => state.authWrapper);
 
   const dispatch = useDispatch();
   const {role} = props.match.params;
@@ -16,8 +20,6 @@ export function FormView(props) {
   useEffect(async () => {
     await dispatch(fetchFormFields(role));
   }, []);
-
-  console.log(props);
 
   return (
     <Fragment>
@@ -27,7 +29,7 @@ export function FormView(props) {
             <Link to="/register">
               <i className="fas fa-chevron-left" />
             </Link>{" "}
-            Italian F&amp;B Producers
+            {roles && roles.find(i=>i.role_id==role).name}
           </h1>
           <hr />
         </div>

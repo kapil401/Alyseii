@@ -68,14 +68,14 @@ const config = {
       static: commonPaths.outputPath,
     }),
   ],
-  devServer: {
-    open: true,
-    clientLogLevel: "silent",
-    contentBase: path.resolve("/public"),
-    publicPath: "/path",
-    historyApiFallback: true,
-    hot: true,
-  },
+  // devServer: {
+  //   open: true,
+  //   clientLogLevel: "silent",
+  //   contentBase: path.resolve("/public"),
+  //   publicPath: "/public",
+  //   historyApiFallback: true,
+  //   hot: true,
+  // },
   module: {
     rules: [
       {
