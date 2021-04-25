@@ -2,8 +2,6 @@ import React, { Fragment, useEffect } from "react";
 import { fetchFormFields } from "../modules/register";
 import { Link } from "react-router-dom";
 import { connect, useSelector, useDispatch } from "react-redux";
-import actions from "../modules/register";
-import { bindActionCreators } from "redux";
 
 export function RegisterView(params) {
   let {
@@ -37,13 +35,4 @@ export function RegisterView(params) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  dispatch,
-  ...bindActionCreators(actions, dispatch),
-});
-
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterView);
+export default RegisterView

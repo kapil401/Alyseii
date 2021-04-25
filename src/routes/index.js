@@ -1,7 +1,7 @@
 import React from "react";
 import { renderRoutes } from "react-router-config";
 import Root from "../layouts/Root";
-import Login from "../routes/login/components/LoginView";
+import LoginView from "../routes/login/components/LoginView";
 import { Redirect } from "react-router";
 import { AuthWrapperView } from "./AuthWrapper/components/AuthWrapperView";
 import AuthLayout from "../layouts/Authlayout";
@@ -38,6 +38,23 @@ export const routes = [
                 path: "/register/:role",
                 exact: true,
                 component: FormView,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: "/login",
+        component: AuthLayout,
+        routes: [
+          {
+            path: "/login",
+            component: AuthWrapperView,
+            routes: [
+              {
+                path: "/login/:role",
+                exact: true,
+                component: LoginView,
               },
             ],
           },

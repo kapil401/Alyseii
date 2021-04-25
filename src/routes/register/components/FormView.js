@@ -6,16 +6,17 @@ import Input from "../../../components/Input/Input";
 import Checkbox from "../../../components/Checkbox/Checkbox";
 import Select from "../../../components/Select/Select";
 import Terms from "../../../components/Terms/Terms";
+import MultiSelecter from "../../../components/MutiSelect/MultiSelect";
 
 export function FormView(props) {
   let { formFields } = useSelector((state) => state.register);
-  
+
   let {
     role_data: { roles },
   } = useSelector((state) => state.authWrapper);
 
   const dispatch = useDispatch();
-  const {role} = props.match.params;
+  const { role } = props.match.params;
 
   useEffect(async () => {
     await dispatch(fetchFormFields(role));
@@ -29,7 +30,7 @@ export function FormView(props) {
             <Link to="/register">
               <i className="fas fa-chevron-left" />
             </Link>{" "}
-            {roles && roles.find(i=>i.role_id==role).name}
+            {roles && roles.find((i) => i.role_id == role).name}
           </h1>
           <hr />
         </div>
@@ -142,6 +143,17 @@ export function FormView(props) {
                           />
                         </Fragment>
                       );
+                    } else if (field.type == "multiselect") {
+                      return (
+                        <Fragment>
+                          <MultiSelecter
+                            displayValue={"option"}
+                            id={field.user_field_id}
+                            Options={field.options}
+                            label={field.title}
+                          />
+                        </Fragment>
+                      );
                     }
                   })}
                 </Fragment>
@@ -153,9 +165,9 @@ export function FormView(props) {
             <div className="form__action form__item">
               <button type="submit">Sign up</button>
               <hr />
-              <a className="btn bg-color-blue mt-4" href="italian-login.html">
+              <Link className="btn bg-color-blue mt-4" to={`/login/${role}`}>
                 Already have an account with us?
-              </a>
+              </Link>
             </div>
           </form>
         </div>
