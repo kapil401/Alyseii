@@ -2,6 +2,8 @@ export const REGISTER_SET_SIGNUP_FORM_FIELDS =
   "REGISTER_SET_SIGNUP_FORM_FIELDS";
 export const REGISTER_SET_SIGNUP_FORM_FIELDS_SPINNER_STATUS =
   "REGISTER_SET_SIGNUP_FORM_FIELDS_SPINNER_STATUS";
+export const SET_REGISTER_FORM_FIELD_VALUES="SET_REGISTER_FORM_FIELD_VALUES"
+
 
 export function setFormFields(data) {
   return {
@@ -14,6 +16,13 @@ export function setFormFieldSpinner(flag) {
   return {
     type: REGISTER_SET_SIGNUP_FORM_FIELDS_SPINNER_STATUS,
     payload: flag,
+  };
+}
+
+export function setFieldValues(data) {
+  return {
+    type: SET_REGISTER_FORM_FIELD_VALUES,
+    payload: data,
   };
 }
 
@@ -50,6 +59,7 @@ export const actions = {
 export const initialState = {
   formFields: {},
   formSpinner: false,
+  formValue:{}
 };
 
 const ACTION_HANDLERS = {
@@ -65,6 +75,12 @@ const ACTION_HANDLERS = {
       formSpinner: action.payload,
     };
   },
+  [SET_REGISTER_FORM_FIELD_VALUES]:(state, action)=>{
+    return {
+      ...state,
+      formValue: action.payload,
+    };
+  }
 };
 
 export default function RegisterReducer(state = initialState, action) {

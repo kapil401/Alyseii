@@ -1,21 +1,18 @@
 import React, { Fragment } from "react";
 
-export function Select({ label, placeholder, Options, id , itemkey}) {
-  
+export function Select({ label, onChange, Options, id, itemkey }) {
   return (
     <Fragment>
       <div className="form__item" key={itemkey}>
         <label>{label}</label>
         <div className="select--field">
-          <select id={id}>
+          <select id={id} onChange={onChange}>
             <option>Select</option>
-            {Options.map((item) => {
-              return (
-                <Fragment>
-                  <option value="user_field_id" key={item.option}>{item.option}</option>
-                </Fragment>
-              );
-            })}
+            {Options.map((item) => 
+                  <option value={item.user_field_option_id} key={item.option}>
+                    {item.option}
+                  </option>
+                )}
           </select>
           <div className="select--field-arrow">
             <svg

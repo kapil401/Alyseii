@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from "react";
-import { fetchFormFields } from "../modules/register";
+import { fetchFormFields, setFieldValues } from "../modules/register";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Input from "../../../components/Input/Input";
@@ -9,7 +9,7 @@ import Terms from "../../../components/Terms/Terms";
 import MultiSelecter from "../../../components/MutiSelect/MultiSelect";
 
 export function FormView(props) {
-  let { formFields } = useSelector((state) => state.register);
+  let { formFields, formValue } = useSelector((state) => state.register);
 
   let {
     role_data: { roles },
@@ -21,6 +21,12 @@ export function FormView(props) {
   useEffect(async () => {
     await dispatch(fetchFormFields(role));
   }, []);
+
+  const handleInput = async (e) => {
+    console.log(e.target);
+    formValue[e.target.id] = e.target.value;
+    await dispatch(setFieldValues(formValue));
+  };
 
   return (
     <Fragment>
@@ -55,6 +61,9 @@ export function FormView(props) {
                             name={field.name}
                             label={field.title}
                             id={field.user_field_id}
+                            onChange={(e) => {
+                              handleInput(e);
+                            }}
                           />
                           {field.type == "password" ? (
                             <Fragment>
@@ -116,6 +125,7 @@ export function FormView(props) {
                             placeholder={field.placeholder}
                             Options={field.options}
                             id={field.user_field_id}
+                            onChange={(e)=>{handleInput(e)}}
                           />
                         </Fragment>
                       );
@@ -129,6 +139,7 @@ export function FormView(props) {
                             placeholder={field.placeholder}
                             Options={field.options}
                             id={field.user_field_id}
+                            onChange={(e)=>{handleInput(e)}}
                           />
                         </Fragment>
                       );
