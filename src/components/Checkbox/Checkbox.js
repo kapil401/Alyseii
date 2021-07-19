@@ -34,11 +34,13 @@ export function Checkbox({ itemkey, label, Options }) {
                       className="form-check-label"
                       htmlFor={item.user_field_id}
                     >
-                      {item.option}
+                      {item.option} 
+                     
                     </label>
+                    
                   </div>
                   {item.options.map((i) => {
-                    return (
+                     return (
                       <Fragment>
                         <div className="form-checkbox-blocks" key={i.user_field_id}>
                           <div className="form-checkbox-item">

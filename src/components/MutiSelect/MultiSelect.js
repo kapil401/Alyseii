@@ -11,7 +11,8 @@ export function MultiSelecter({displayValue,id,Options,label}) {
             options={Options}
             displayValue={displayValue}
             id={id}
-          />
+           />
+    {/* console.log(id); */}
         </div>
       </div>
     </Fragment>

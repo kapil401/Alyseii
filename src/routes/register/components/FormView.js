@@ -28,6 +28,11 @@ export function FormView(props) {
     await dispatch(setFieldValues(formValue));
   };
 
+//   const submithandle= (event)=>{
+//     event.preventDefault();
+  
+//  }
+
   return (
     <Fragment>
       <div>
@@ -41,7 +46,7 @@ export function FormView(props) {
           <hr />
         </div>
         <div className="card-form">
-          <form>
+          <form >
             <div className="small-text">* Required Information</div>
             {Object.keys(formFields).map((item) => {
               return (
@@ -174,7 +179,8 @@ export function FormView(props) {
             <hr />
             {/*  */}
             <div className="form__action form__item">
-              <button type="submit">Sign up</button>
+              <button type="submit" 
+                >Sign up</button>
               <hr />
               <Link className="btn bg-color-blue mt-4" to={`/login/${role}`}>
                 Already have an account with us?
